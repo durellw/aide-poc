@@ -1,19 +1,23 @@
 ---
-
 - hosts: all
+  gather_facts: no
   tasks:
-#  - name: apply STIG
-
   - name: install aide
     ansible.builtin.package:
       name: aide
       state: present
 
-  - name: create cronjob to execute aide
-    ansible.builtin.cron:
-      name: "run aide"
-      minute: "0"
-      hour: "*"
-      job: "aide"
+  - name: copy aide.conf to root's home for testing
+    ansible.builtin.copy:
+      src: files/aide.conf
+      dest: /root
+      owner: root
+      group: root
+      mode: u=rw,g=r,o=r
 
-#  - name: copy aide output to secure storage
+  - name: initial run of aide
+    command: uptime
+    args:
+      creates: /var/lib/aide/aide.db.new.gz
+    tags:
+      test
