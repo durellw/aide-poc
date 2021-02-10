@@ -16,7 +16,7 @@
       mode: u=rw,g=r,o=r
 
   - name: initial run of aide
-    command: uptime
+    command: aide -i -c /root/aide.conf 
     args:
       creates: /var/lib/aide/aide.db.new.gz
     tags:
