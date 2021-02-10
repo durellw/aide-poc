@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  tasks:
+#  - name: apply STIG
+
+  - name: install aide
+    ansible.builtin.package:
+      name: aide
+      state: present
+
+  - name: create cronjob to execute aide
+    ansible.builtin.cron:
+      name: "run aide"
+      minute: "0"
+      hour: "*"
+      job: "aide"
+
+#  - name: copy aide output to secure storage
