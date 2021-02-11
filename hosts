@@ -1,2 +1,5 @@
-[rhel7]
+[aide_targets]
 gvs-test.lan
+
+[processor]
+aide-test.lan
