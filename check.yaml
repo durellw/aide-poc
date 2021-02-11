@@ -2,6 +2,10 @@
 - hosts: all
   gather_facts: no
   tasks:
+
+  - name: periodic run of aide
+    command: aide -u -c /root/aide.conf
+
   - name: run aide to check for changes
     command: aide --compare -c /root/aide.conf
     register: aide_check
@@ -10,4 +14,4 @@
 
   - name: debug aide check
     ansible.builtin.debug:
-      var: aide_check
+      var: aide_check.rc

@@ -17,7 +17,5 @@
 
   - name: initial run of aide
     command: aide -i -c /root/aide.conf 
-    args:
-      creates: /var/lib/aide/aide.db.new.gz
     tags:
       test
